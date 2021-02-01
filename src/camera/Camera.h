@@ -1,4 +1,4 @@
-/* -*-c++-*- AD-Census - Copyright (C) 2021.
+/* -*-c++-*- StereoV3D - Copyright (C) 2021.
 * Author	: Ethan Li<ethan.li.whu@gmail.com>
 * https://github.com/ethan-li-coding/StereoV3DCode
 * Describe	: header of camera class
@@ -30,7 +30,7 @@ public:
     inline Camera() = default;
 	inline ~Camera() = default;
 	
-	/** 通过K、R、t来构造相机，注意这里用了移动语义避免复制操作，传入的参数在执行构造函数后内存销毁 */
+	/** 通过K、R、t来构造相机，注意这里用了移动语义避免复制操作，传入的参数在执行构造函数后内存销毁，建议使用临时变量构造 */
 	inline Camera(Matrix3dr K, Matrix3dr R, Vector3d t) : K_(std::move(K)), R_(std::move(R)), t_(std::move(t)) {
 		KI_ = K_.inverse();
 		RT_ = R_.transpose();
