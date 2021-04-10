@@ -13,23 +13,41 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="matrix">
+      <UniqueIdentifier>{70834149-5aec-434e-be6d-055bce74639f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="..\..\src\camera\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\camera\Camera.h">
+    <ClInclude Include="..\..\src\eigen_defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\matrix\essential.h">
+      <Filter>matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\matrix\homography.h">
+      <Filter>matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\test\datasets.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="StereoV3DCode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StereoV3DCode.cpp">
+    <ClCompile Include="..\..\src\matrix\essential.cpp">
+      <Filter>matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\matrix\homography.cpp">
+      <Filter>matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\test\datasets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
