@@ -45,7 +45,7 @@ void sv3d::Essential::Solve_EightPoints(const Mat3X x1, const Mat3X x2)
 	assert(x1.cols() == x2.cols());
 
 	// 构建线性方程组的系数矩阵A
-	int np = x1.cols();
+	auto np = x1.cols();
 	RMatX9 a_mat(np, 9);
 	for (int n = 0; n < np; n++) {
 		const auto x1_x = x1.data()[3 * n];
