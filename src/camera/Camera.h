@@ -7,9 +7,7 @@
 #ifndef SV3D_CAMERA_H
 #define SV3D_CAMERA_H
 
-#include <Eigen/Dense>
 #include "../eigen_defs.h"
-using namespace Eigen;
 
 namespace sv3d
 {

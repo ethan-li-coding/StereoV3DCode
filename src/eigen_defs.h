@@ -8,6 +8,7 @@
 
 #include <Eigen/Core>
 #include <Eigen/Dense>
+using namespace Eigen;
 
 namespace sv3d
 {
