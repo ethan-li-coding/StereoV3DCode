@@ -12,11 +12,11 @@
 namespace  sv3d
 {
 
-	class Homography
+	class HomographySolver
 	{
 	public:
-		Homography() = default;
-		~Homography() = default;
+		HomographySolver() = default;
+		~HomographySolver() = default;
 		
 		/**
 		 * \brief 单应性矩阵求解

@@ -3,9 +3,9 @@
 * https://github.com/ethan-li-coding/StereoV3DCode
 */
 
-#include "essential.h"
+#include "essential_solver.h"
 
-void sv3d::Essential::Solve(const Mat3X p1, const Mat3X p2, const RMat3 k1_mat, const RMat3 k2_mat, const SOLVE_TYPE& solver_type)
+void sv3d::EssentialSolver::Solve(const Mat3X p1, const Mat3X p2, const RMat3 k1_mat, const RMat3 k2_mat, const SOLVE_TYPE& solver_type)
 {
 	assert(p1.cols() >= 8);
 	assert(p1.rows() == p2.rows());
@@ -23,7 +23,7 @@ void sv3d::Essential::Solve(const Mat3X p1, const Mat3X p2, const RMat3 k1_mat, 
 	Solve(x1, x2, solver_type);
 }
 
-void sv3d::Essential::Solve(const Mat3X x1, const Mat3X x2, const SOLVE_TYPE& solver_type)
+void sv3d::EssentialSolver::Solve(const Mat3X x1, const Mat3X x2, const SOLVE_TYPE& solver_type)
 {
 	switch (solver_type) {
 	case EIGHT_POINTS:
@@ -33,12 +33,12 @@ void sv3d::Essential::Solve(const Mat3X x1, const Mat3X x2, const SOLVE_TYPE& so
 	}
 }
 
-sv3d::Mat3 sv3d::Essential::Value()
+sv3d::Mat3 sv3d::EssentialSolver::Value()
 {
 	return data_;
 }
 
-void sv3d::Essential::Solve_EightPoints(const Mat3X x1, const Mat3X x2)
+void sv3d::EssentialSolver::Solve_EightPoints(const Mat3X x1, const Mat3X x2)
 {
 	assert(x1.cols() >= 8);
 	assert(x1.rows() == x2.rows());

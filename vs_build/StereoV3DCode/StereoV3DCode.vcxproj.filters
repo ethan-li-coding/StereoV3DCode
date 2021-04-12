@@ -27,28 +27,28 @@
     <ClInclude Include="..\..\src\eigen_defs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\matrix\essential.h">
-      <Filter>matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\matrix\homography.h">
-      <Filter>matrix</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\test\datasets.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\matrix\homography_solver.h">
+      <Filter>matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\matrix\essential_solver.h">
+      <Filter>matrix</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StereoV3DCode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\matrix\essential.cpp">
-      <Filter>matrix</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\matrix\homography.cpp">
-      <Filter>matrix</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\test\datasets.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\matrix\homography_solver.cpp">
+      <Filter>matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\matrix\essential_solver.cpp">
+      <Filter>matrix</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

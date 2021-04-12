@@ -101,7 +101,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\3rdparty\Eigen328;..\..\src\camera</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\3rdparty\Eigen\eigen3;..\..\src\camera</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,7 +134,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\3rdparty\Eigen328;..\..\src\camera</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\3rdparty\Eigen\eigen3;..\..\src\camera</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,16 +149,16 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\camera\camera.h" />
     <ClInclude Include="..\..\src\eigen_defs.h" />
-    <ClInclude Include="..\..\src\matrix\essential.h" />
-    <ClInclude Include="..\..\src\matrix\homography.h" />
+    <ClInclude Include="..\..\src\matrix\essential_solver.h" />
+    <ClInclude Include="..\..\src\matrix\homography_solver.h" />
     <ClInclude Include="..\..\src\test\datasets.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\matrix\essential.cpp">
+    <ClCompile Include="..\..\src\matrix\essential_solver.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\src\matrix\homography.cpp">
+    <ClCompile Include="..\..\src\matrix\homography_solver.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>

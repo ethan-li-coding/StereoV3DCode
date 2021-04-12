@@ -3,19 +3,19 @@
 * https://github.com/ethan-li-coding/StereoV3DCode
 */
 
-#include "homography.h"
+#include "homography_solver.h"
 
-void sv3d::Homography::Solve(const Mat3X p1, const Mat3X p2)
+void sv3d::HomographySolver::Solve(const Mat3X p1, const Mat3X p2)
 {
 	Solve_FourPoints(p1, p2);
 }
 
-sv3d::Mat3 sv3d::Homography::Value()
+sv3d::Mat3 sv3d::HomographySolver::Value()
 {
 	return data_;
 }
 
-void sv3d::Homography::Solve_FourPoints(const Mat3X p1, const Mat3X p2)
+void sv3d::HomographySolver::Solve_FourPoints(const Mat3X p1, const Mat3X p2)
 {
 	assert(p1.cols() >= 4);
 	assert(p1.rows() == p2.rows());

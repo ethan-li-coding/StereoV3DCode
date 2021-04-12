@@ -11,11 +11,11 @@
 namespace  sv3d
 {
 
-	class Essential
+	class EssentialSolver
 	{
 	public:
-		Essential() = default;
-		~Essential() = default;
+		EssentialSolver() = default;
+		~EssentialSolver() = default;
 		
 		enum SOLVE_TYPE {
 			EIGHT_POINTS = 0,

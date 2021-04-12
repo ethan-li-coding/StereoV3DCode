@@ -8,8 +8,8 @@
 #include <string>
 
 
-#include "../../src/matrix/essential.h"
-#include "../../src/matrix/homography.h"
+#include "../../src/matrix/essential_solver.h"
+#include "../../src/matrix/homography_solver.h"
 #include "../../src/test/datasets.h"
 #include "camera.h"
 
@@ -46,12 +46,12 @@ void TestEssentialSolving()
 	cout << kPairsCount << " pairs of homonymous points have been generated!" << endl << endl;
 
 	// 解算本质矩阵
-	cout << "Start Solving Essential Matrix......" << endl;
+	cout << "Start Solving EssentialSolver Matrix......" << endl;
 	auto start = steady_clock::now();
 
-	Essential essential;
-	essential.Solve(p1, p2, datasets.cam1.K_, datasets.cam2.K_, Essential::EIGHT_POINTS);
-	Mat3 Es = essential.Value();
+	EssentialSolver EssentialSolver;
+	EssentialSolver.Solve(p1, p2, datasets.cam1.K_, datasets.cam2.K_, EssentialSolver::EIGHT_POINTS);
+	Mat3 Es = EssentialSolver.Value();
 
 	auto end = steady_clock::now();
 	auto tt = duration_cast<microseconds>(end - start);
@@ -78,12 +78,12 @@ void TestHomographySolving()
 	cout << kPairsCount << " pairs of homonymous points in a plane have been generated!" << endl << endl;
 
 	// 解算单应性矩阵
-	cout << "Start Solving Homography Matrix......" << endl;
+	cout << "Start Solving HomographySolver Matrix......" << endl;
 	auto start = steady_clock::now();
 
-	Homography homography;
-	homography.Solve(p1, p2);
-	Mat3 Ho = homography.Value();
+	HomographySolver HomographySolver;
+	HomographySolver.Solve(p1, p2);
+	Mat3 Ho = HomographySolver.Value();
 
 	auto end = steady_clock::now();
 	auto tt = duration_cast<microseconds>(end - start);
