@@ -8,7 +8,10 @@ void sv3d::SolveRtFromEssential(const Mat3& E, std::vector<Mat3>& R_vec, std::ve
 	Mat3 U = USV.matrixU();
 	Mat3 Vt = USV.matrixV().transpose();
 
-	// Last column of U is undetermined since d = (a a 0).
+	// 由于E的两个奇异值相等，所以U和Vt不唯一，表现为U的的前两列可以互换，Vt的前两行可以互换
+	// 列互换和行互换带来的结果是行列式互为相反数
+	// 而旋转R矩阵的行列式是+1,W的行列式为+1,且R = UWVt or UWtVt, 如果UV的行列式符号不相同求出的R行列式是-1，是错误的
+	// 可以强制让U和Vt的行列式均为正值，当判断U和Vt行列式为负时，把U的最后一列和Vt的最后一行符号做一个相反，让行列式变为正值
 	if (U.determinant() < 0) {
 		U.col(2) *= -1;
 	}
@@ -21,6 +24,11 @@ void sv3d::SolveRtFromEssential(const Mat3& E, std::vector<Mat3>& R_vec, std::ve
 	W << 0, -1,  0,
 		 1,  0,  0,
 		 0,  0,  1;
+
+	auto d1 = E.determinant();
+	auto d2 = U.determinant();
+	auto d3 = Vt.determinant();
+	auto d4 = W.determinant();
 	
 	R_vec.clear();
 	t_vec.clear();
@@ -29,6 +37,9 @@ void sv3d::SolveRtFromEssential(const Mat3& E, std::vector<Mat3>& R_vec, std::ve
 	R_vec.emplace_back(U * W * Vt);
 	R_vec.emplace_back(U* W.transpose() *Vt);
 
+	auto d5 = R_vec[0].determinant();
+	auto d6 = R_vec[1].determinant();
+	
 	// t1^ = U*Z*Ut = S1, t2^ = U*Zt*Ut = -t1^
 	// S1*t1 = 0 -> U*Z*Ut*t1=0 -> Z*(Ut*t1)=0
 	// -> Ut*t1 = (0,0,1)T -> t1 = U*(0,0,1)T = U.col(2)
