@@ -21,7 +21,7 @@ namespace sv3d
 			
 			// 模拟构造一组双目系统
 			w = 640; h = 480;
-			RMat3 K1,K2,R,RI;
+			Mat3 K1,K2,R,RI;
 			Vec3 t0, t;
 			K1 << 5.3398796382502758e+02, 0., 3.2838647583744523e+02,
 				  0.,5.2871083166023755e+02, 2.3684273091753437e+02,
@@ -52,19 +52,19 @@ namespace sv3d
 
 		/**
 		 * \brief 生成同名点对
-		 * \param k		要生成的同名点对数量
-		 * \param p1	相机1上的像素点
-		 * \param p2	相机2上的像素点
+		 * \param k[in]		要生成的同名点对数量
+		 * \param p1[in]	相机1上的像素点
+		 * \param p2[in]	相机2上的像素点
 		 */
 		void GenarateHomonymyPairs(const unsigned& k, Mat3X& p1,Mat3X& p2);
 
 		
 		/**
 		 * \brief 生成一个平面内的同名点对
-		 * \param k		要生成的同名点对数量
-		 * \param p1	相机1上的像素点
-		 * \param p2	相机2上的像素点
-		 * \param H		p1,p2的单应性变换矩阵，p2 = H*p1
+		 * \param k[in]		要生成的同名点对数量
+		 * \param p1[in]	相机1上的像素点
+		 * \param p2[in]	相机2上的像素点
+		 * \param H[in]		p1,p2的单应性变换矩阵，p2 = H*p1
 		 */
 		void GenarateHomonymyPairsInPlane(const unsigned& k, Mat3X& p1, Mat3X& p2, Mat3& H);
 	};

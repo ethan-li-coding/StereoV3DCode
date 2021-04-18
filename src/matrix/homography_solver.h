@@ -20,8 +20,8 @@ namespace  sv3d
 		
 		/**
 		 * \brief 单应性矩阵求解
-		 * \param p1 视图1上像素点齐次坐标
-		 * \param p2 视图2上像素点齐次坐标
+		 * \param[in] p1 视图1上像素点齐次坐标
+		 * \param[in] p2 视图2上像素点齐次坐标
 		 */
 		void Solve(const Mat3X p1, const Mat3X p2);
 
@@ -33,8 +33,8 @@ namespace  sv3d
 	private:
 		/**
 		 * \brief 四点法求解单应性矩阵
-		 * \param p1 视图1上的像素点齐次坐标
-		 * \param p2 视图2上的像素点齐次坐标
+		 * \param[in] p1 视图1上的像素点齐次坐标
+		 * \param[in] p2 视图2上的像素点齐次坐标
 		 */
 		void Solve_FourPoints(const Mat3X p1, const Mat3X p2);
 

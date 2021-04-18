@@ -12,19 +12,21 @@ using namespace Eigen;
 
 namespace sv3d
 {
-
-	// 3d 矢量 (double类型)
-	using Vec3 = Eigen::Vector3d;
-
-	// 3d 矢量 (float类型)
-	using Vec3f = Eigen::Vector3f;
-		
 	// 3d 矢量 (double类型)
 	using Vec2 = Eigen::Vector2d;
 		
 	/// 2d 矢量 (float类型)
 	using Vec2f = Eigen::Vector2f;
+	
+	// 3d 矢量 (double类型)
+	using Vec3 = Eigen::Vector3d;
 
+	// 3d 矢量 (float类型)
+	using Vec3f = Eigen::Vector3f;
+
+	/// 4d 矢量 
+	using Vec4 = Eigen::Vector4d;
+	
 	// 9d 矢量
 	using Vec9 = Eigen::Matrix<double, 9, 1>;
 	
@@ -33,13 +35,16 @@ namespace sv3d
 		
 	// 3x4 矩阵 (double类型)
 	using Mat34 = Eigen::Matrix<double, 3, 4>;
-		
+	
 	// 3x3 矩阵 (double类型)（行主序）
 	using RMat3 = Eigen::Matrix<double, 3, 3, Eigen::RowMajor>;
 
 	// 3x4 矩阵 (double类型)
 	using RMat34 = Eigen::Matrix<double, 3, 4, Eigen::RowMajor>;
-		
+
+	// 4x4 矩阵 (double类型)
+	using Mat4 = Eigen::Matrix<double, 4, 4>;
+	
 	// 2xN 矩阵 (double类型)
 	using Mat2X = Eigen::Matrix<double, 2, Eigen::Dynamic>;
 		

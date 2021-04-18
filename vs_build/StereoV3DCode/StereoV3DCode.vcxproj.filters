@@ -36,6 +36,12 @@
     <ClInclude Include="..\..\src\matrix\essential_solver.h">
       <Filter>matrix</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\matrix\matrix_utils.h">
+      <Filter>matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\matrix\orientation_form_matrix.h">
+      <Filter>matrix</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StereoV3DCode.cpp">
@@ -48,6 +54,12 @@
       <Filter>matrix</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\matrix\essential_solver.cpp">
+      <Filter>matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\matrix\matrix_utils.cpp">
+      <Filter>matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\matrix\orientation_form_matrix.cpp">
       <Filter>matrix</Filter>
     </ClCompile>
   </ItemGroup>

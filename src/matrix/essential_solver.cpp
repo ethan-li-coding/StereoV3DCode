@@ -5,7 +5,7 @@
 
 #include "essential_solver.h"
 
-void sv3d::EssentialSolver::Solve(const Mat3X p1, const Mat3X p2, const RMat3 k1_mat, const RMat3 k2_mat, const SOLVE_TYPE& solver_type)
+void sv3d::EssentialSolver::Solve(const Mat3X p1, const Mat3X p2, const Mat3 k1_mat, const Mat3 k2_mat, const SOLVE_TYPE& solver_type)
 {
 	assert(p1.cols() >= 8);
 	assert(p1.rows() == p2.rows());
@@ -14,10 +14,8 @@ void sv3d::EssentialSolver::Solve(const Mat3X p1, const Mat3X p2, const RMat3 k1
 	// 通过内参矩阵k将p转换到x，x = k_inv*p
 	Mat3X x1(3,p1.cols()), x2(3,p2.cols());
 
-	const RMat3 k1i = k1_mat.inverse();
-	const RMat3 k2i = k2_mat.inverse();
-	x1 = k1i * p1;
-	x2 = k2i * p2;
+	x1 = k1_mat.inverse() * p1;
+	x2 = k2_mat.inverse() * p2;
 
 	// 求解
 	Solve(x1, x2, solver_type);
@@ -58,9 +56,9 @@ void sv3d::EssentialSolver::Solve_EightPoints(const Mat3X x1, const Mat3X x2)
 		dat[6] = x1_x; dat[7] = x1_y; dat[8] = 1;
 	}
 	
-	// 求解系数矩阵的最小特征值，对应的特征向量即矢量 e
+	// 求解ATA的最小特征值对应的特征向量即矢量 e
 	Eigen::SelfAdjointEigenSolver<Eigen::Matrix<double,9, 9>> solver(a_mat.transpose()*a_mat);
-	const Vec9 e = solver.eigenvectors().leftCols<1>();
+	const Vec9 e = solver.eigenvectors().col(0);
 	
 	// 矢量 e 构造本质矩阵 E
 	data_ = Eigen::Map<const RMat3>(e.data());

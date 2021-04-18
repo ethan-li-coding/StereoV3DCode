@@ -10,6 +10,7 @@
 
 #include "../../src/matrix/essential_solver.h"
 #include "../../src/matrix/homography_solver.h"
+#include "../../src/matrix/orientation_form_matrix.h"
 #include "../../src/test/datasets.h"
 #include "camera.h"
 
@@ -38,14 +39,16 @@ int main()
 
 void TestEssentialSolving()
 {
-	// 构造同名点集
+	// >>>>>>构造同名点集
+	
 	sv3d::SimulativeStereoDataset datasets;
 	Mat3X p1, p2;
 	const unsigned kPairsCount = 20;
 	datasets.GenarateHomonymyPairs(kPairsCount, p1, p2);
 	cout << kPairsCount << " pairs of homonymous points have been generated!" << endl << endl;
 
-	// 解算本质矩阵
+	// >>>>>>解算本质矩阵
+	
 	cout << "Start Solving EssentialSolver Matrix......" << endl;
 	auto start = steady_clock::now();
 
@@ -57,14 +60,37 @@ void TestEssentialSolving()
 	auto tt = duration_cast<microseconds>(end - start);
 
 	double diff = 0.0;
-	const double scale = datasets.E.data()[0] / Es.data()[0];
+	double scale = datasets.E.data()[0] / Es.data()[0];
 	Es *= scale;
 	for (int i = 0; i < 9; i++) {
-		diff = abs(Es.data()[i] - datasets.E.data()[i]);
+		diff += abs(Es.data()[i] - datasets.E.data()[i]);
 	}
 	diff /= 9;
 	cout << "Done! Solving Mean Error = " << diff << "   Timing: " << tt.count() / 1000.0 << "ms" << endl << endl;
 
+	// >>>>>>本质矩阵分解R,t
+	
+	cout << "Start Solving R,t from Essential Matrix......" << endl;
+	start = steady_clock::now();
+
+	Mat3 R;
+	Vec3 t;
+	OrientationFormEssential(p1, p2, datasets.cam1.K_, datasets.cam2.K_, Es, R, t);
+
+	end = steady_clock::now();
+	tt = duration_cast<microseconds>(end - start);
+
+	double diff_R=0.0, diff_t = 0.0;
+	for (int i = 0; i < 9; i++) {
+		diff_R += abs(R.data()[i] - datasets.cam2.R_.data()[i]);
+	}
+	diff_R /= 9;
+	scale = datasets.cam2.t_[0] / t[0];
+	for (int i = 0; i < 3; i++) {
+		diff_t += abs(t[i]*scale - datasets.cam2.t_[i]);
+	}
+	diff_t /= 3;
+	cout << "Done! Solving Mean Error = " << "diff_R: "<< diff_R << " diff_t: " << diff_t << "   Timing: " << tt.count() / 1000.0 << "ms" << endl << endl;
 }
 
 void TestHomographySolving()
@@ -92,7 +118,7 @@ void TestHomographySolving()
 	const double scale = H.data()[0] / Ho.data()[0];
 	Ho *= scale;
 	for (int i = 0; i < 9; i++) {
-		diff = abs(Ho.data()[i] - H.data()[i]);
+		diff += abs(Ho.data()[i] - H.data()[i]);
 	}
 	diff /= 9;
 	cout << "Done! Solving Mean Error = " << diff << "   Timing: " << tt.count() / 1000.0 << "ms" << endl << endl;
