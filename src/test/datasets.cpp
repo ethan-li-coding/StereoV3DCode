@@ -8,10 +8,10 @@
 
 void sv3d::SimulativeStereoDataset::GenarateHomonymyPairs(const unsigned& k, Mat3X& p1, Mat3X& p2)
 {
-	// ÔÚÁ¢ÌåÏà»úµÄ¿Õ¼äÄÚËæ»úÉú³Ék¸ö¿Õ¼äµã
+	// åœ¨ç«‹ä½“ç›¸æœºçš„ç©ºé—´å†…éšæœºç”Ÿæˆkä¸ªç©ºé—´ç‚¹
 	const double kDepthMin = 300., kDepthMax = 500.;
 
-	// ÔÚ×îĞ¡Éî¶ÈÆ½Ãæ¼ÆËãËÄ¸ö½ÇµãµÄÊÀ½ç×ø±ê£¨ÊÀ½ç×ø±êÏµ=×óÏà»ú×ø±êÏµ£©
+	// åœ¨æœ€å°æ·±åº¦å¹³é¢è®¡ç®—å››ä¸ªè§’ç‚¹çš„ä¸–ç•Œåæ ‡ï¼ˆä¸–ç•Œåæ ‡ç³»=å·¦ç›¸æœºåæ ‡ç³»ï¼‰
 	Vec3 x1(0, 0, kDepthMin), x2(0, h-1, kDepthMin),
 		x3(w-1, 0, kDepthMin), x4(w - 1, h - 1, kDepthMin);
 	auto P1 = cam1.TransformPointI2W(x1);
@@ -19,14 +19,14 @@ void sv3d::SimulativeStereoDataset::GenarateHomonymyPairs(const unsigned& k, Mat
 	auto P3 = cam1.TransformPointI2W(x3);
 	auto P4 = cam1.TransformPointI2W(x4);
 
-	// Éú³ÉÒ»¸ö¿Õ¼äÁ¢·½Ìå£¬ÔÚÁ¢·½Ìå·¶Î§ÄÚËæ»úÉú³É¿Õ¼äµã
+	// ç”Ÿæˆä¸€ä¸ªç©ºé—´ç«‹æ–¹ä½“ï¼Œåœ¨ç«‹æ–¹ä½“èŒƒå›´å†…éšæœºç”Ÿæˆç©ºé—´ç‚¹
 	const auto z_min(kDepthMin), z_max(kDepthMax);
 	const auto x_min = (std::min)(P1.data()[0], P2.data()[0]);
 	const auto x_max = (std::max)(P3.data()[0], P4.data()[0]);
-	const auto y_min = (std::min)(P1.data()[0], P3.data()[0]);
-	const auto y_max = (std::max)(P2.data()[0], P4.data()[0]);
+	const auto y_min = (std::min)(P1.data()[1], P3.data()[1]);
+	const auto y_max = (std::max)(P2.data()[1], P4.data()[1]);
 
-	// Ëæ»úÉú³Ék¸ö¿Õ¼äµã
+	// éšæœºç”Ÿæˆkä¸ªç©ºé—´ç‚¹
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_real_distribution<double> rand(0.0f, 1.0f);
@@ -52,10 +52,10 @@ void sv3d::SimulativeStereoDataset::GenarateHomonymyPairs(const unsigned& k, Mat
 
 void sv3d::SimulativeStereoDataset::GenarateHomonymyPairsInPlane(const unsigned& k, Mat3X& p1, Mat3X& p2, Mat3& H)
 {
-	// ÔÚÁ¢ÌåÏà»úµÄÄ³Éî¶ÈÆ½ÃæÄÚËæ»úÉú³Ék¸ö¿Õ¼äµã
+	// åœ¨ç«‹ä½“ç›¸æœºçš„æŸæ·±åº¦å¹³é¢å†…éšæœºç”Ÿæˆkä¸ªç©ºé—´ç‚¹
 	const double kDepth = 400.;
 
-	// ÔÚÉî¶ÈÆ½Ãæ¼ÆËãËÄ¸ö½ÇµãµÄÊÀ½ç×ø±ê£¨ÊÀ½ç×ø±êÏµ=×óÏà»ú×ø±êÏµ£©
+	// åœ¨æ·±åº¦å¹³é¢è®¡ç®—å››ä¸ªè§’ç‚¹çš„ä¸–ç•Œåæ ‡ï¼ˆä¸–ç•Œåæ ‡ç³»=å·¦ç›¸æœºåæ ‡ç³»ï¼‰
 	Vec3 x1(0, 0, kDepth), x2(0, h - 1, kDepth),
 		x3(w - 1, 0, kDepth), x4(w - 1, h - 1, kDepth);
 	auto P1 = cam1.TransformPointI2W(x1);
@@ -63,14 +63,14 @@ void sv3d::SimulativeStereoDataset::GenarateHomonymyPairsInPlane(const unsigned&
 	auto P3 = cam1.TransformPointI2W(x3);
 	auto P4 = cam1.TransformPointI2W(x4);
 
-	// Éú³ÉÒ»¸ö¿Õ¼ä½ØÃæ£¬½ØÃæ·¶Î§ÄÚËæ»úÉú³É¿Õ¼äµã
+	// ç”Ÿæˆä¸€ä¸ªç©ºé—´æˆªé¢ï¼Œæˆªé¢èŒƒå›´å†…éšæœºç”Ÿæˆç©ºé—´ç‚¹
 	const auto z(kDepth);
 	const auto x_min = (std::min)(P1.data()[0], P2.data()[0]);
 	const auto x_max = (std::max)(P3.data()[0], P4.data()[0]);
 	const auto y_min = (std::min)(P1.data()[0], P3.data()[0]);
 	const auto y_max = (std::max)(P2.data()[0], P4.data()[0]);
 
-	// Ëæ»úÉú³Ék¸ö¿Õ¼äµã
+	// éšæœºç”Ÿæˆkä¸ªç©ºé—´ç‚¹
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_real_distribution<double> rand(0.0f, 1.0f);
@@ -92,7 +92,7 @@ void sv3d::SimulativeStereoDataset::GenarateHomonymyPairsInPlane(const unsigned&
 		p2.data()[3 * n] = x2[0]; p2.data()[3 * n + 1] = x2[1]; p2.data()[3 * n + 2] = 1.;
 	}
 
-	// ¼ÆËãµ¥Ó¦ĞÔ¾ØÕóH, p2 = H*p1
+	// è®¡ç®—å•åº”æ€§çŸ©é˜µH, p2 = H*p1
 	Mat3X t(3, 1); t << cam2.t_[0], cam2.t_[1], cam2.t_[2];
 	MatXX nt(1, 3); nt << 0, 0, 1. / z;
 	H = cam2.K_ * (cam2.R_ + t * nt) * cam1.K_.inverse();
